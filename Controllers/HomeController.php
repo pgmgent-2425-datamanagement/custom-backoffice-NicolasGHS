@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 class HomeController extends BaseController {
 
-    public static function index () {
+    public function index () {
 
-        self::loadView('/home', [
+        $this->loadView('/home', [
             'title' => 'Homepage'
         ]);
     }

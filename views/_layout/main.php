@@ -12,9 +12,9 @@
 
     <nav>
         <a href="/">Home</a>
-        <a href="#">item 2</a>
-        <a href="#">item 3</a>
-        <a href="#">item 4</a>
+        <a href="/guitars">Gitaren</a>
+        <a href="/brands">Merken</a>
+        <a href="/orders">Bestellingen</a>
     </nav>
 
     <main>

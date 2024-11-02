@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 class GuitarController extends BaseController {
 
-    public static function index() {
-        self::loadView('/guitar', [
+    public function index() {
+        $this->loadView('/guitars', [
             'title' => 'Guitars'
         ]);
     } 

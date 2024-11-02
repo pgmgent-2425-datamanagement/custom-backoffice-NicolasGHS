@@ -3,5 +3,15 @@
 //$router->get('/', function() { echo 'Dit is de index vanuit de route'; });
 $router->setNamespace('\App\Controllers');
 $router->get('/', 'HomeController@index');
-$router->get('/guitar', 'GuitarController@index');
-$router->get('/orders', 'OrderController@index');
+$router->get('/guitars', function() {
+    $controller = new \App\Controllers\GuitarController();
+    $controller->index();
+});
+$router->get('/orders', function() {
+    $controller = new \App\Controllers\OrderController();
+    $controller->index();
+});
+$router->get('/brands', function() {
+    $controller = new \App\Controllers\BrandController();
+    $controller->index();
+});

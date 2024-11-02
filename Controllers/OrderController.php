@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 class OrderController extends BaseController {
 
-    public static function index() {
-        self::loadView('/order', [
+    public function index() {
+        $this->loadView('/orders', [
             'title' => 'orders'
         ]);
     } 

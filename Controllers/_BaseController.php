@@ -23,7 +23,7 @@ class BaseController {
         return $obj;
     }
 
-    private function loadView ($view = '', $params = [], $layout = 'main') {
+    protected function loadView ($view = '', $params = [], $layout = 'main') {
 
         //maakt variabelen van een array
         extract($params);
