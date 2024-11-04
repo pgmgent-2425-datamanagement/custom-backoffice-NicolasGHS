@@ -1,16 +1,16 @@
-<h1>Guitars</h1>
+<h1 class="text-xl font-bold mb-4">Gitaren</h1>
 
 <?php if (!empty($guitars)): ?>
-    <ul>
+    <ul class="space-y-4">
         <?php foreach ($guitars as $guitar): ?>
-            <li>
-                Naam: <?php echo htmlspecialchars($guitar->getName()); ?><br>
-                Beschrijving: <?php echo htmlspecialchars($guitar->getDescription()); ?><br>
-                Voorraad: <?php echo htmlspecialchars($guitar->getStock()); ?><br>
-                Brand: <?php echo htmlspecialchars($guitar->getBrandName()); ?> <!-- Hier is de aanpassing -->
+            <li class="p-6 bg-gray-100 rounded-lg shadow-md">
+                <div class="text-lg font-semibold text-gray-700">Naam: <?php echo htmlspecialchars($guitar->getName()); ?></div>
+                <div class="text-gray-600">Beschrijving: <?php echo htmlspecialchars($guitar->getDescription()); ?></div>
+                <div class="text-gray-600">Voorraad: <?php echo htmlspecialchars($guitar->getStock()); ?></div>
+                <div class="text-gray-600">Merk: <?php echo htmlspecialchars($guitar->getBrandName()); ?></div>
             </li>
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
-    <p>No guitars found.</p>
+    <p class="text-gray-600">Geen gitaren gevonden.</p>
 <?php endif; ?>

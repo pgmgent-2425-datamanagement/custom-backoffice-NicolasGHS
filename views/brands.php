@@ -1,11 +1,13 @@
-<h1>Brands</h1>
+<h1 class="text-xl font-bold mb-4">Merken</h1>
 
 <?php if (!empty($brands)): ?>
-    <ul>
+    <ul class="space-y-2">
         <?php foreach ($brands as $brand): ?>
-            <li><?php echo htmlspecialchars($brand->getName()); ?></li>
+            <li class="p-4 bg-gray-100 rounded shadow">
+                <?php echo htmlspecialchars($brand->getName()); ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
-    <p>No brands found.</p>
+    <p class="text-gray-600">Geen merken gevonden.</p>
 <?php endif; ?>
