@@ -7,6 +7,7 @@ class BaseModel {
     protected $pk;
     protected $db;
 
+
     public static function __callStatic ($method, $arg) {
         $obj = new static;
         $result = call_user_func_array (array ($obj, $method), $arg);
@@ -16,6 +17,8 @@ class BaseModel {
     }
 
     public function __construct() {
+        global $db;
+        $this->db = $db;
 
         if(!isset($this->table)) {
             $single = strtolower( $this->getClassName(get_called_class()));
@@ -42,7 +45,7 @@ class BaseModel {
         }
     }
 
-    private function all () {
+    protected function all () {
 
         $sql = 'SELECT * FROM `' . $this->table . '`';
         $pdo_statement = $this->db->prepare($sql);
@@ -53,7 +56,7 @@ class BaseModel {
         return self::castToModel($db_items);
     }
 
-    private function find ( int $id ) {
+    protected function find ( int $id ) {
 
         $sql = 'SELECT * FROM `' . $this->table . '` WHERE `' . $this->pk . '` = :p_id';
         $pdo_statement = $this->db->prepare($sql);
@@ -79,9 +82,11 @@ class BaseModel {
         $item = new $model_name();
         //Loops through the db columns and 
         
-        foreach($db_item as $column => $value) {
-            $item->{$column} = $value;
-        } 
+        foreach ($db_item as $column => $value) {
+            if (property_exists($item, $column)) {
+                $item->{$column} = $value;
+            }
+        }
         return $item;
     }
 
