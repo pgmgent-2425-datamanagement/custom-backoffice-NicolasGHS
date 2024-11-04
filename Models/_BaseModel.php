@@ -37,7 +37,7 @@ class BaseModel {
             }
         }
         if(!isset($this->pk)) {
-            $this->pk = 'id';
+            $this->pk = 'brand_id'; // moet mss algemeneen gemaakt worden...
         }
         if(!isset($this->db)) {
             global $db;
