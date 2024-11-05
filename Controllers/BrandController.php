@@ -17,4 +17,21 @@ class BrandController extends BaseController {
 
         ]);
     } 
+
+    public function addBrandForm() {
+        $this->loadView('/add-brand', [
+            'title' => 'Nieuw Merk Toevoegen'
+        ]);
+    }
+
+    public function storeBrand() {
+        $name = $_POST['name'];
+
+        $brand = new BrandModel();
+        $brand->setName($name);
+        $brand->save();
+
+        header('Location: /brands');
+        exit;
+    }
 }
