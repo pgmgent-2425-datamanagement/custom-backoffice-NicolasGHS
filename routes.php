@@ -18,5 +18,6 @@ $router->get('/brands', function() {
 $router->get('/guitars/add', 'GuitarController@addGuitarForm');
 $router->post('/guitars/add', 'GuitarController@storeGuitar');
 $router->post('/guitars/delete/(\d+)', 'GuitarController@deleteGuitar');
-
+$router->get('/guitars/edit/(\d+)', 'GuitarController@editGuitarForm');
+$router->post('/guitars/update/(\d+)', 'GuitarController@updateGuitar');
 

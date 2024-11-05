@@ -52,6 +52,52 @@ class GuitarController extends BaseController {
         exit;
     }
 
+    public function editGuitarForm($guitarId) {
+        $guitarModel = new GuitarModel();
+        $guitar = $guitarModel->findById($guitarId);
+    
+        if (!$guitar) {
+            // Als de gitaar niet gevonden is, redirect terug naar de gitarenlijst
+            header('Location: /guitars');
+            exit;
+        }
+    
+        $this->loadView('/edit-guitar', [
+            'title' => 'Gitaar Bewerken',
+            'guitar' => $guitar
+        ]);
+    }
+
+    public function updateGuitar($guitarId) {
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $stock = (int)$_POST['stock'];
+        $brandName = $_POST['brand'];
+    
+        $brandModel = new BrandModel();
+        $brand = $brandModel->findByName($brandName);
+    
+        if (!$brand) {
+            // Voeg het merk toe als het nog niet bestaat
+            $brandModel->setName($brandName);
+            $brandModel->save();
+            $brandId = $brandModel->getId();
+        } else {
+            $brandId = $brand->getId();
+        }
+    
+        $guitar = new GuitarModel();
+        $guitar->setGuitarId($guitarId);  // Gebruik de setter hier
+        $guitar->setName($name);
+        $guitar->setDescription($description);
+        $guitar->setStock($stock);
+        $guitar->setBrandId($brandId);
+        $guitar->update();
+    
+        header('Location: /guitars');
+        exit;
+    }
+
     public function deleteGuitar($guitarId) {
         $guitar = new GuitarModel();
         $guitar->setGuitarId($guitarId);  

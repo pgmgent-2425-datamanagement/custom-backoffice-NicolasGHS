@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use PDO;
+
 class GuitarModel extends BaseModel {
     protected $table = "guitars";
     protected int $guitar_id;
@@ -31,6 +33,26 @@ class GuitarModel extends BaseModel {
 
     public function getAllGuitars() {
         return $this->all();
+    }
+
+    public function findById($guitarId) {
+        $sql = 'SELECT * FROM guitars WHERE guitar_id = :guitar_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([':guitar_id' => $guitarId]);
+        $pdo_statement->setFetchMode(PDO::FETCH_CLASS, get_class($this));
+        return $pdo_statement->fetch();
+    }
+
+    public function update() {
+        $sql = 'UPDATE guitars SET name = :name, description = :description, stock = :stock, brand_id = :brand_id WHERE guitar_id = :guitar_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([
+            ':name' => $this->name,
+            ':description' => $this->description,
+            ':stock' => $this->stock,
+            ':brand_id' => $this->brand_id,
+            ':guitar_id' => $this->guitar_id,
+        ]);
     }
 
     public function getName() {
