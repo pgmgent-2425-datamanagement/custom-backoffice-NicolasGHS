@@ -11,7 +11,14 @@
     <input type="number" name="stock" id="stock" value="<?php echo htmlspecialchars($guitar->getStock()); ?>" required>
 
     <label for="brand">Merk:</label>
-    <input type="text" name="brand" id="brand" value="<?php echo htmlspecialchars($guitar->getBrandName()); ?>" required>
+    <select name="brand" id="brand" required>
+        <?php foreach ($brands as $brand): ?>
+            <option value="<?php echo $brand->getId(); ?>"
+                <?php if ($guitar->getBrandId() == $brand->getId()) echo 'selected'; ?>>
+                <?php echo htmlspecialchars($brand->getName()); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
 
     <button type="submit">Opslaan</button>
 </form>

@@ -93,7 +93,10 @@ class GuitarModel extends BaseModel {
         return $brand ? $brand->getName() : null;
     }
 
-    // TODO: Gebruiker kan naam van brand ingeven, als het niet bestaat wordt er een brand aangemaakt, anders wordt er gekeken welk id het moet zijn op basis van de naam
+    public function getBrandId() {
+        return $this->brand_id;
+    }
+
     public function setBrandId($brandId) {
         $this->brand_id = $brandId;
     }

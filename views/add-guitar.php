@@ -18,7 +18,13 @@
 
     <div>
         <label for="brand" class="block text-sm font-medium text-gray-700">Merk</label>
-        <input type="text" id="brand" name="brand" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        <select id="brand" name="brand" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <?php foreach ($brands as $brand): ?>
+                <option value="<?php echo $brand->getId(); ?>">
+                    <?php echo htmlspecialchars($brand->getName()); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
 
     <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">

@@ -11,6 +11,9 @@ class GuitarController extends BaseController {
         $guitarModel = new GuitarModel();
         $guitars = $guitarModel->getAllGuitars();
 
+        $brandModel = new BrandModel();
+        $brands = $brandModel->getAllBrands();
+
         $this->loadView('/guitars', [
             'title' => 'Guitars',
             'guitars' => $guitars
@@ -18,8 +21,12 @@ class GuitarController extends BaseController {
     } 
 
     public function addGuitarForm() {
+        $brandModel = new BrandModel();
+        $brands = $brandModel->getAllBrands();
+
         $this->loadView('/add-guitar', [
-            'title' => 'Nieuwe Gitaar Toevoegen'
+            'title' => 'Nieuwe Gitaar Toevoegen',
+            'brands' => $brands
         ]);
     }
 
@@ -55,6 +62,9 @@ class GuitarController extends BaseController {
     public function editGuitarForm($guitarId) {
         $guitarModel = new GuitarModel();
         $guitar = $guitarModel->findById($guitarId);
+
+        $brandModel = new BrandModel();
+        $brands = $brandModel->getAllBrands();
     
         if (!$guitar) {
             // Als de gitaar niet gevonden is, redirect terug naar de gitarenlijst
@@ -64,7 +74,8 @@ class GuitarController extends BaseController {
     
         $this->loadView('/edit-guitar', [
             'title' => 'Gitaar Bewerken',
-            'guitar' => $guitar
+            'guitar' => $guitar,
+            'brands' => $brands
         ]);
     }
 
