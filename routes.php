@@ -15,3 +15,5 @@ $router->get('/brands', function() {
     $controller = new \App\Controllers\BrandController();
     $controller->index();
 });
+$router->get('/guitars/add', 'GuitarController@addGuitarForm');
+$router->post('/guitars/add', 'GuitarController@storeGuitar');
