@@ -33,7 +33,7 @@ class GuitarController extends BaseController {
         $brand = $brandModel->findByName($brandName);
 
         if (!$brand) {
-            // Voeg het merk toe als het nog niet bestaat
+            // Voegt het merk toe als het nog niet bestaat
             $brandModel->setName($brandName);
             $brandModel->save();
             $brandId = $brandModel->getId();
@@ -48,7 +48,15 @@ class GuitarController extends BaseController {
         $guitar->setBrandId($brandId);
         $guitar->save();
 
-        // Redirect terug naar de gitarenlijst
+        header('Location: /guitars');
+        exit;
+    }
+
+    public function deleteGuitar($guitarId) {
+        $guitar = new GuitarModel();
+        $guitar->setGuitarId($guitarId);  
+        $guitar->delete();
+    
         header('Location: /guitars');
         exit;
     }

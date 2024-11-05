@@ -22,6 +22,12 @@ class GuitarModel extends BaseModel {
         ]);
     }
 
+    public function delete() {
+        $sql = 'DELETE FROM guitars WHERE guitar_id = :guitar_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([':guitar_id' => $this->guitar_id]);
+    }
+
 
     public function getAllGuitars() {
         return $this->all();
@@ -37,6 +43,10 @@ class GuitarModel extends BaseModel {
     
     public function getGuitarId() {
         return $this->guitar_id;
+    }
+
+    public function setGuitarId($guitar_id) {
+        $this->guitar_id = $guitar_id;
     }
 
     public function getDescription() {
