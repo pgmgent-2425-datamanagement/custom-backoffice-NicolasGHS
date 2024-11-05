@@ -34,4 +34,13 @@ class BrandController extends BaseController {
         header('Location: /brands');
         exit;
     }
+
+    public function deleteBrand($brandId) {
+        $brand = new BrandModel();
+        $brand->setBrandId($brandId);  
+        $brand->delete();
+    
+        header('Location: /brands');
+        exit;
+    }
 }

@@ -40,6 +40,12 @@ class BrandModel extends BaseModel {
         }
     }
 
+    public function delete() {
+        $sql = 'DELETE FROM brands WHERE brand_id = :brand_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([':brand_id' => $this->brand_id]);
+    }
+
     public function getAllBrands() {
         return $this->all();
     }
@@ -54,6 +60,10 @@ class BrandModel extends BaseModel {
     
     public function getBrandId() {
         return $this->brand_id;
+    }
+
+    public function setBrandId($brand_id) {
+        $this->brand_id = $brand_id;
     }
 
     public function getId() {
