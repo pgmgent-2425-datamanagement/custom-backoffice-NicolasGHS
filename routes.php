@@ -23,3 +23,5 @@ $router->post('/guitars/update/(\d+)', 'GuitarController@updateGuitar');
 $router->get('/brands/add', 'BrandController@addBrandForm');
 $router->post('/brands/add', 'BrandController@storeBrand');
 $router->post('/brands/delete/(\d+)', 'BrandController@deleteBrand');
+$router->get('/brands/edit/(\d+)', 'BrandController@editBrandForm');
+$router->post('/brands/update/(\d+)', 'BrandController@updateBrand');

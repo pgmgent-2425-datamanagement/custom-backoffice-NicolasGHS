@@ -24,6 +24,22 @@ class BrandController extends BaseController {
         ]);
     }
 
+    public function editBrandForm($brandId) {
+        $brandModel = new BrandModel();
+        $brand = $brandModel->findById($brandId);
+    
+        if (!$brand) {
+            // Als de gitaar niet gevonden is, redirect terug naar de gitarenlijst
+            header('Location: /brands');
+            exit;
+        }
+    
+        $this->loadView('/edit-brand', [
+            'title' => 'Merk Bewerken',
+            'brand' => $brand
+        ]);
+    }
+
     public function storeBrand() {
         $name = $_POST['name'];
 
@@ -31,6 +47,19 @@ class BrandController extends BaseController {
         $brand->setName($name);
         $brand->save();
 
+        header('Location: /brands');
+        exit;
+    }
+
+    public function updateBrand($brandId) {
+        $name = $_POST['name'];
+        
+    
+        $brand = new BrandModel();
+        $brand->setBrandId($brandId);
+        $brand->setName($name);
+        $brand->update();
+    
         header('Location: /brands');
         exit;
     }

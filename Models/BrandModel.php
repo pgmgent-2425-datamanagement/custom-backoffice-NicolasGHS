@@ -25,6 +25,14 @@ class BrandModel extends BaseModel {
         return null; // Merk niet gevonden
     }
 
+    public function findById($brandId) {
+        $sql = 'SELECT * FROM brands WHERE brand_id = :brand_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([':brand_id' => $brandId]);
+        $pdo_statement->setFetchMode(PDO::FETCH_CLASS, get_class($this));
+        return $pdo_statement->fetch();
+    }
+
     public function save() {
         if (isset($this->brand_id)) {
             // Update bestaand merk
@@ -36,8 +44,17 @@ class BrandModel extends BaseModel {
             $sql = "INSERT INTO {$this->table} (name) VALUES (:name)";
             $stmt = $this->db->prepare($sql);
             $stmt->execute([':name' => $this->name]);
-            $this->brand_id = $this->db->lastInsertId(); // Verkrijg het laatst toegevoegde id
+            $this->brand_id = $this->db->lastInsertId();
         }
+    }
+
+    public function update() {
+        $sql = 'UPDATE brands SET name = :name WHERE brand_id = :brand_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([
+            ':name' => $this->name,
+            ':brand_id' => $this->brand_id, 
+        ]);
     }
 
     public function delete() {
@@ -67,6 +84,6 @@ class BrandModel extends BaseModel {
     }
 
     public function getId() {
-        return $this->brand_id; // Geef het merk-ID terug
+        return $this->brand_id; 
     }
 }
