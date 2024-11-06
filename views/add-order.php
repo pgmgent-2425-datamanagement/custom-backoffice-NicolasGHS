@@ -10,9 +10,8 @@
         <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
         <select id="status" name="status" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
             <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
+            <option value="Delivered">Delivered</option>
             <option value="shipped">Shipped</option>
-            <option value="cancelled">Cancelled</option>
         </select>
     </div>
 

@@ -21,5 +21,5 @@
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
-    <p class="text-gray-600">Geen gitaren gevonden.</p>
+    <p class="text-gray-600">Geen bestellingen gevonden.</p>
 <?php endif; ?>
