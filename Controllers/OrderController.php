@@ -10,9 +10,14 @@ class OrderController extends BaseController {
         $orderModel = new OrderModel();
         $orders = $orderModel->getAllOrders();
 
+        $activeOrdersCount = $orderModel->countActiveOrders();
+        $totalOrdersCount = $orderModel->countAllOrders();
+
         $this->loadView('/orders', [
             'title' => 'Orders',
-            'orders' => $orders
+            'orders' => $orders,
+            'activeOrdersCount' => $activeOrdersCount,
+            'totalOrdersCount' => $totalOrdersCount,
 
         ]);
     } 
@@ -83,6 +88,17 @@ class OrderController extends BaseController {
         header('Location: /orders');
         exit;
     }
+
+    public function dashboard() {
+        $orderModel = new OrderModel();
+        $activeOrdersCount = $orderModel->countActiveOrders();
+    
+        $this->loadView('/', [
+            'title' => 'Dashboard',
+            'activeOrdersCount' => $activeOrdersCount,
+        ]);
+    }
+    
 
 
 }

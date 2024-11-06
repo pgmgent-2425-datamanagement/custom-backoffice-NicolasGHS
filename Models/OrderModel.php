@@ -54,6 +54,20 @@ class OrderModel extends BaseModel {
         return $pdo_statement->fetch();
     }
 
+    public function countActiveOrders(): int {
+        $sql = 'SELECT COUNT(*) FROM orders WHERE status != :status';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([':status' => 'delivered']);
+        return (int) $pdo_statement->fetchColumn();
+    }
+
+    public function countAllOrders(): int {
+        $sql = 'SELECT COUNT(*) FROM orders';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute();
+        return (int) $pdo_statement->fetchColumn();
+    }
+
     public function getUserId(): int {
         return $this->user_id;
     }
