@@ -17,6 +17,26 @@
                     <div class="text-gray-600">Price: <?php echo htmlspecialchars($order->getPrice()); ?></div>
                     <div class="text-gray-600">Datum besteld: <?php echo htmlspecialchars($order->getOrderDate()); ?></div>
                 </div>
+
+                <div class="flex space-x-4 mt-4">
+                    <!-- Edit button -->
+                    <a href="/orders/edit/<?php echo $order->getOrderId(); ?>" class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-white hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-4.772-1.768a2 2 0 112.828 2.828L7 21H3v-4L13.232 6.232z"/>
+                        </svg>
+                        Bewerken
+                    </a>
+
+                    <!-- Delete button -->
+                    <form action="/orders/delete/<?php echo $order->getOrderId(); ?>" method="POST" onsubmit="return confirm('Weet je zeker dat je deze bestelling wilt verwijderen?');">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                            <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                            Verwijder
+                        </button>
+                    </form>
+                </div>
             </li>
         <?php endforeach; ?>
     </ul>

@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use PDO;
+
 class OrderModel extends BaseModel {
     protected $table = "orders";
+    protected int $order_id;
     protected int $user_id;
     protected string $status;
     protected int $price;
@@ -19,6 +22,24 @@ class OrderModel extends BaseModel {
             ':price' => $this->price,
             ':order_date' => $this->order_date,
         ]);
+    }
+
+    public function update() {
+        $sql = 'UPDATE orders SET user_id = :user_id, status = :status, price = :price, order_date = :order_date WHERE order_id = :order_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([
+            ':user_id' => $this->user_id,
+            ':status' => $this->status,
+            ':price' => $this->price,
+            ':order_date' => $this->order_date,
+            ':order_id' => $this->order_id
+        ]);
+    }
+
+    public function delete() {
+        $sql = 'DELETE FROM orders WHERE order_id = :order_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([':order_id' => $this->order_id]);
     }
 
     public function getAllOrders() {
