@@ -17,5 +17,14 @@
     <label for="order_date">Datum Besteld:</label>
     <input type="date" name="order_date" id="order_date" value="<?php echo htmlspecialchars($order->getOrderDate()); ?>" required>
 
+    <label for="guitars">Gitaren:</label>
+    <select id="guitars" name="guitars[]" multiple class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        <?php foreach ($guitars as $guitar): ?>
+            <option value="<?= $guitar->getGuitarId(); ?>" <?php echo in_array($guitar->getGuitarId(), array_map(function($guitar) { return $guitar->getGuitarId(); }, $orderGuitars)) ? 'selected' : ''; ?>>
+                <?= $guitar->getName(); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+
     <button type="submit">Opslaan</button>
 </form>

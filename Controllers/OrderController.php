@@ -72,9 +72,17 @@ class OrderController extends BaseController {
             exit;
         }
 
+        $orderGuitarModel = new OrderGuitarModel();
+        $guitars = $orderGuitarModel->getGuitarsForOrder($orderId);  
+
+        $guitarModel = new GuitarModel();
+        $allGuitars = $guitarModel->getAllGuitars();
+
         $this->loadView('/edit-order', [
             'title' => 'Bestelling Bewerken',
             'order' => $order,
+            'guitars' => $allGuitars,
+            'orderGuitars' => $guitars
         ]);
     }
 
