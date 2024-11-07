@@ -15,7 +15,7 @@ class OrderController extends BaseController {
 
         $status = isset($_GET['status']) ? $_GET['status'] : '';
 
-        $orders = $orderModel->getOrdersByStatus($status);
+        $orders = $orderModel->getOrdersWithGuitars($status);
 
         $activeOrdersCount = $orderModel->countActiveOrders();
         $totalOrdersCount = $orderModel->countAllOrders();

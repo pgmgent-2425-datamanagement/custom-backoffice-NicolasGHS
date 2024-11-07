@@ -62,6 +62,33 @@ class OrderModel extends BaseModel {
         $pdo_statement->setFetchMode(PDO::FETCH_CLASS, get_class($this));
         return $pdo_statement->fetchAll();
     }
+
+    public function getOrdersWithGuitars($status = '') {
+        // Als er een status is, filter dan op status
+        if ($status) {
+            $sql = '
+                SELECT o.*, g.name AS guitar_name
+                FROM orders o
+                LEFT JOIN guitar_order oi ON o.order_id = oi.order_id
+                LEFT JOIN guitars g ON oi.guitar_id = g.guitar_id
+                WHERE o.status = :status
+            ';
+            $pdo_statement = $this->db->prepare($sql);
+            $pdo_statement->execute([':status' => $status]);
+        } else {
+            $sql = '
+                SELECT o.*, g.name AS guitar_name
+                FROM orders o
+                LEFT JOIN guitar_order oi ON o.order_id = oi.order_id
+                LEFT JOIN guitars g ON oi.guitar_id = g.guitar_id
+            ';
+            $pdo_statement = $this->db->prepare($sql);
+            $pdo_statement->execute();
+        }
+    
+        $pdo_statement->setFetchMode(PDO::FETCH_ASSOC);
+        return $pdo_statement->fetchAll();
+    }
     
 
     public function findById($orderId) {
