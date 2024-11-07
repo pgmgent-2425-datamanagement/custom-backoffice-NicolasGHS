@@ -31,4 +31,19 @@ class OrderGuitarModel extends BaseModel {
         $pdo_statement = $this->db->prepare($sql);
         $pdo_statement->execute([':order_id' => $orderId]);
     }
+
+    public function getMostPopularGuitar() {
+        $sql = 'SELECT guitar_id, COUNT(*) AS order_count
+                FROM guitar_order
+                GROUP BY guitar_id
+                ORDER BY order_count DESC
+                LIMIT 1';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute();
+        
+        // Haal het resultaat op en geef de guitar_id van de populairste gitaar terug
+        $result = $pdo_statement->fetch(PDO::FETCH_ASSOC);
+        
+        return $result ? $result['guitar_id'] : null;
+    }
 }

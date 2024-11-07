@@ -9,4 +9,13 @@
     <div class="stat-item">
         <p><strong>Totaal aantal orders:</strong> <?= $totalOrdersCount ?></p>
     </div>
+
+    <h2 class="mt-3">Populairste Gitaar</h2>
+    <div class="stat-item">
+        <?php if ($mostPopularGuitar): ?>
+            <p><strong>De populairste gitaar:</strong> <?= $mostPopularGuitar->getName() ?></p>
+        <?php else: ?>
+            <p>Er zijn nog geen bestellingen voor gitaren.</p>
+        <?php endif; ?>
+    </div>
 </div>
