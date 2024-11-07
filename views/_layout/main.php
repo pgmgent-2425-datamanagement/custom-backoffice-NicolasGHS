@@ -29,10 +29,6 @@
 
         <!-- Main Content -->
         <main class="flex-grow p-6 bg-white overflow-y-auto">
-            <header class="mb-6">
-                <h1 class="text-2xl font-semibold text-gray-800"><?= $title ?? 'Dashboard' ?></h1>
-                <p class="text-gray-600">Beheer eenvoudig je site-content.</p>
-            </header>
 
             <!-- Page Content -->
             <div class="content">
