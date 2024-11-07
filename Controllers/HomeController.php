@@ -11,11 +11,13 @@ class HomeController extends BaseController {
 
         $activeOrdersCount = $orderModel->countActiveOrders();
         $totalOrdersCount = $orderModel->countAllOrders();
+        // $mostPopularGuitar = $orderModel->mostPopularGuitar();
 
         $this->loadView('/home', [
             'title' => 'Homepage',
             'activeOrdersCount' => $activeOrdersCount,
             'totalOrdersCount' => $totalOrdersCount,
+            // 'mostPopularGuitar' => $mostPopularGuitar
         ]);
     }
 

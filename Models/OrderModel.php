@@ -22,6 +22,8 @@ class OrderModel extends BaseModel {
             ':price' => $this->price,
             ':order_date' => $this->order_date,
         ]);
+
+        $this->order_id = $this->db->lastInsertId();
     }
 
     public function update() {

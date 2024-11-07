@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Models\OrderModel;
+use App\Models\GuitarModel;
+use App\Models\OrderGuitarModel;
+
 
 class OrderController extends BaseController {
 
@@ -23,8 +26,12 @@ class OrderController extends BaseController {
     } 
 
     public function addOrderForm() {
+        $guitarModel = new GuitarModel();
+        $guitars = $guitarModel->getAllGuitars();
+
         $this->loadView('/add-order', [
-            'title' => 'Nieuwe bestelling Toevoegen'
+            'title' => 'Nieuwe bestelling Toevoegen',
+            'guitars' => $guitars
         ]);
     }
 
@@ -33,6 +40,7 @@ class OrderController extends BaseController {
         $status = $_POST['status'];
         $price = $_POST['price'];
         $order_date = $_POST['order_date'];
+        $guitars = $_POST['guitars'];
 
         $order = new OrderModel();
         $order->setUserId($user_id);
@@ -40,6 +48,15 @@ class OrderController extends BaseController {
         $order->setPrice($price);
         $order->setOrderDate($order_date);
         $order->save();
+
+        $orderId = $order->getOrderId();
+
+        if (!empty($guitars)) {
+            $orderGuitarModel = new OrderGuitarModel();  // Deze model moet je zelf maken als die nog niet bestaat
+            foreach ($guitars as $guitarId) {
+                $orderGuitarModel->addGuitarToOrder($orderId, $guitarId);
+            }
+        }
 
         header('Location: /orders');
         exit;

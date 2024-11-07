@@ -25,6 +25,15 @@
         <input type="date" id="order_date" name="order_date" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
     </div>
 
+    <div>
+        <label for="guitars" class="block text-sm font-medium text-gray-700">Gitaren</label>
+        <select id="guitars" name="guitars[]" multiple class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+            <?php foreach ($guitars as $guitar): ?>
+                <option value="<?= $guitar->getGuitarId(); ?>"><?= $guitar->getName(); ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+
     <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
         Opslaan
     </button>
