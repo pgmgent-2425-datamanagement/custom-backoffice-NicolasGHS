@@ -25,4 +25,10 @@ class OrderGuitarModel extends BaseModel {
         $pdo_statement->setFetchMode(PDO::FETCH_CLASS, 'App\Models\GuitarModel');
         return $pdo_statement->fetchAll();
     }
+
+    public function deleteGuitarsFromOrder($orderId) {
+        $sql = 'DELETE FROM guitar_order WHERE order_id = :order_id';
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute([':order_id' => $orderId]);
+    }
 }

@@ -106,6 +106,9 @@ class OrderController extends BaseController {
     }
 
     public function deleteOrder($orderId) {
+        $orderGuitarModel = new OrderGuitarModel();
+        $orderGuitarModel->deleteGuitarsFromOrder($orderId); 
+           
         $order = new OrderModel();
         $order->setOrderId($orderId);  
         $order->delete();
