@@ -48,6 +48,22 @@ class OrderModel extends BaseModel {
         return $this->all();
     }
 
+    public function getOrdersByStatus($status) {
+        if ($status) {
+            $sql = 'SELECT * FROM orders WHERE status = :status';
+            $pdo_statement = $this->db->prepare($sql);
+            $pdo_statement->execute([':status' => $status]);
+        } else {
+            $sql = 'SELECT * FROM orders';
+            $pdo_statement = $this->db->prepare($sql);
+            $pdo_statement->execute();
+        }
+    
+        $pdo_statement->setFetchMode(PDO::FETCH_CLASS, get_class($this));
+        return $pdo_statement->fetchAll();
+    }
+    
+
     public function findById($orderId) {
         $sql = 'SELECT * FROM orders WHERE order_id = :order_id';
         $pdo_statement = $this->db->prepare($sql);

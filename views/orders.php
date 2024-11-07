@@ -1,10 +1,23 @@
 <h1 class="text-xl font-bold mb-4">Bestellingen</h1>
 
+
+<!-- Filter Form -->
+<form action="/orders" method="GET" class="mb-4">
+    <label for="status" class="mr-2">Filter op status:</label>
+    <select name="status" id="status" class="px-4 py-2 border border-gray-300 rounded-md">
+        <option value="">Alle</option>
+        <option value="pending" <?= isset($_GET['status']) && $_GET['status'] == 'pending' ? 'selected' : '' ?>>Pending</option>
+        <option value="delivered" <?= isset($_GET['status']) && $_GET['status'] == 'delivered' ? 'selected' : '' ?>>Delivered</option>
+        <option value="shipped" <?= isset($_GET['status']) && $_GET['status'] == 'shipped' ? 'selected' : '' ?>>Shipped</option>
+    </select>
+    <button type="submit" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">Filter</button>
+</form>
+
 <a href="/orders/add" class="inline-flex items-center px-4 py-2 bg-gray-700 mb-3 border border-transparent rounded-md font-semibold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
     <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
     </svg>
-    Voeg Merk Toe
+    Voeg Bestelling Toe
 </a>
 
 <?php if (!empty($orders)): ?>

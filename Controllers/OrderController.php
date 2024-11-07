@@ -11,7 +11,11 @@ class OrderController extends BaseController {
 
     public function index() {
         $orderModel = new OrderModel();
-        $orders = $orderModel->getAllOrders();
+        // $orders = $orderModel->getAllOrders();
+
+        $status = isset($_GET['status']) ? $_GET['status'] : '';
+
+        $orders = $orderModel->getOrdersByStatus($status);
 
         $activeOrdersCount = $orderModel->countActiveOrders();
         $totalOrdersCount = $orderModel->countAllOrders();
