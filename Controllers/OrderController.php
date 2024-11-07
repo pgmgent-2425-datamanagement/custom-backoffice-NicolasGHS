@@ -14,8 +14,9 @@ class OrderController extends BaseController {
         // $orders = $orderModel->getAllOrders();
 
         $status = isset($_GET['status']) ? $_GET['status'] : '';
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
 
-        $orders = $orderModel->getOrdersWithGuitars($status);
+        $orders = $orderModel->getOrdersWithGuitars($status, $searchTerm);
 
         $activeOrdersCount = $orderModel->countActiveOrders();
         $totalOrdersCount = $orderModel->countAllOrders();
@@ -25,6 +26,7 @@ class OrderController extends BaseController {
             'orders' => $orders,
             'activeOrdersCount' => $activeOrdersCount,
             'totalOrdersCount' => $totalOrdersCount,
+            'searchTerm' => $searchTerm
 
         ]);
     } 

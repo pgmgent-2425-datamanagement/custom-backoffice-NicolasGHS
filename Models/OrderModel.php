@@ -63,32 +63,40 @@ class OrderModel extends BaseModel {
         return $pdo_statement->fetchAll();
     }
 
-    public function getOrdersWithGuitars($status = '') {
-        // Als er een status is, filter dan op status
+    public function getOrdersWithGuitars($status = '', $searchTerm = '') {
+        // Basis SQL-query voor het ophalen van orders met gitaren
+        $sql = '
+            SELECT o.*, g.name AS guitar_name
+            FROM orders o
+            LEFT JOIN guitar_order oi ON o.order_id = oi.order_id
+            LEFT JOIN guitars g ON oi.guitar_id = g.guitar_id
+        ';
+    
+        // Voeg filters toe voor de status en zoekterm
+        $conditions = [];
+        $params = [];
+    
         if ($status) {
-            $sql = '
-                SELECT o.*, g.name AS guitar_name
-                FROM orders o
-                LEFT JOIN guitar_order oi ON o.order_id = oi.order_id
-                LEFT JOIN guitars g ON oi.guitar_id = g.guitar_id
-                WHERE o.status = :status
-            ';
-            $pdo_statement = $this->db->prepare($sql);
-            $pdo_statement->execute([':status' => $status]);
-        } else {
-            $sql = '
-                SELECT o.*, g.name AS guitar_name
-                FROM orders o
-                LEFT JOIN guitar_order oi ON o.order_id = oi.order_id
-                LEFT JOIN guitars g ON oi.guitar_id = g.guitar_id
-            ';
-            $pdo_statement = $this->db->prepare($sql);
-            $pdo_statement->execute();
+            $conditions[] = 'o.status = :status';
+            $params[':status'] = $status;
         }
+    
+        if ($searchTerm) {
+            $conditions[] = 'g.name LIKE :searchTerm';
+            $params[':searchTerm'] = '%' . $searchTerm . '%';
+        }
+    
+        if (!empty($conditions)) {
+            $sql .= ' WHERE ' . implode(' AND ', $conditions);
+        }
+    
+        $pdo_statement = $this->db->prepare($sql);
+        $pdo_statement->execute($params);
     
         $pdo_statement->setFetchMode(PDO::FETCH_ASSOC);
         return $pdo_statement->fetchAll();
     }
+    
     
 
     public function findById($orderId) {
