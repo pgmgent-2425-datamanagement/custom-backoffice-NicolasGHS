@@ -1,5 +1,4 @@
-<h1>Base MVC</h1>
-<p>Welcome to this base mvc project.</p>
+<h1>Backoffice</h1>
 
 <div class="dashboard-statistics">
     <h2 class="mt-3">Bestellingen</h2>
