@@ -3,10 +3,10 @@
 <div class="dashboard-statistics">
     <h2 class="mt-3">Bestellingen</h2>
     <div class="stat-item">
-        <p><strong>Aantal actieve orders:</strong> <?= $activeOrdersCount ?></p>
+        <p><strong>Aantal actieve bestellingen:</strong> <?= $activeOrdersCount ?></p>
     </div>
     <div class="stat-item">
-        <p><strong>Totaal aantal orders:</strong> <?= $totalOrdersCount ?></p>
+        <p><strong>Totaal aantal bestellingen:</strong> <?= $totalOrdersCount ?></p>
     </div>
 
     <h2 class="mt-3">Populairste Gitaar</h2>
