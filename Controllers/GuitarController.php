@@ -36,12 +36,12 @@ class GuitarController extends BaseController {
         $stock = (int)$_POST['stock'];
         $brandName = $_POST['brand'];
 
-        $name = $_FILES['image']['name'];
+        $image_name = $_FILES['image']['name'];
         $tmp = $_FILES['image']['tmp_name'];
 
         $to_folder = BASE_DIR . '/public/images/';
 
-        $uuid = uniqid() . '-' . $name;
+        $uuid = uniqid() . '-' . $image_name;
 
         move_uploaded_file($tmp, $to_folder . $uuid);
 
