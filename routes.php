@@ -30,6 +30,8 @@ $router->post('/orders/add', 'OrderController@storeOrder');
 $router->get('/orders/edit/(\d+)', 'OrderController@editOrderForm');
 $router->post('/orders/update/(\d+)', 'OrderController@updateOrder');
 $router->post('/orders/delete/(\d+)', 'OrderController@deleteOrder');
+$router->get('/filemanager/delete/(.*)', 'FilemanagerController@delete');
 $router->get('/filemanager', 'FilemanagerController@list');
 $router->get('/filemanager/(.*)', 'FilemanagerController@list');
+
 
