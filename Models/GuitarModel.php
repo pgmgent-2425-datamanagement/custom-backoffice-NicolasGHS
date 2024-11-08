@@ -11,16 +11,18 @@ class GuitarModel extends BaseModel {
     protected string $description;
     protected int $stock;
     protected int $brand_id;
+    protected ?string $image;
 
 
     public function save() {
-        $sql = 'INSERT INTO guitars (name, description, stock, brand_id) VALUES (:name, :description, :stock, :brandId)';
+        $sql = 'INSERT INTO guitars (name, description, stock, brand_id, image) VALUES (:name, :description, :stock, :brandId, :image)';
         $pdo_statement = $this->db->prepare($sql);
         $pdo_statement->execute([
             ':name' => $this->name,
             ':description' => $this->description,
             ':stock' => $this->stock,
             ':brandId' => $this->brand_id,
+            ':image' => $this->image,
         ]);
     }
 
@@ -44,13 +46,14 @@ class GuitarModel extends BaseModel {
     }
 
     public function update() {
-        $sql = 'UPDATE guitars SET name = :name, description = :description, stock = :stock, brand_id = :brand_id WHERE guitar_id = :guitar_id';
+        $sql = 'UPDATE guitars SET name = :name, description = :description, stock = :stock, brand_id = :brand_id, image_path = :image_path WHERE guitar_id = :guitar_id';
         $pdo_statement = $this->db->prepare($sql);
         $pdo_statement->execute([
             ':name' => $this->name,
             ':description' => $this->description,
             ':stock' => $this->stock,
             ':brand_id' => $this->brand_id,
+            ':image_path' => $this->image_path,
             ':guitar_id' => $this->guitar_id,
         ]);
     }
@@ -100,5 +103,14 @@ class GuitarModel extends BaseModel {
     public function setBrandId($brandId) {
         $this->brand_id = $brandId;
     }
+    
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
 
 }

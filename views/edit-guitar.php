@@ -1,6 +1,6 @@
 <h1 class="text-xl font-bold mb-4">Gitaar Bewerken</h1>
 
-<form action="/guitars/update/<?php echo $guitar->getGuitarId(); ?>" method="POST">
+<form action="/guitars/update/<?php echo $guitar->getGuitarId(); ?>" method="POST" enctype="multipart/form-data">
     <label for="name">Naam:</label>
     <input type="text" name="name" id="name" value="<?php echo htmlspecialchars($guitar->getName()); ?>" required>
 
@@ -19,6 +19,9 @@
             </option>
         <?php endforeach; ?>
     </select>
+
+    <label for="image">Foto:</label>
+    <input type="file" name="image" id="image" accept="image/*">
 
     <button type="submit">Opslaan</button>
 </form>

@@ -16,6 +16,10 @@
                     <div class="text-gray-600">Beschrijving: <?php echo htmlspecialchars($guitar->getDescription()); ?></div>
                     <div class="text-gray-600">Voorraad: <?php echo htmlspecialchars($guitar->getStock()); ?></div>
                     <div class="text-gray-600">Merk: <?php echo htmlspecialchars($guitar->getBrandName()); ?></div>
+
+                    <?php if ($guitar->getImage()): ?>
+                        <img src="/images/<?= $guitar->getImage(); ?>" alt="Gitaar Foto" class="mt-4 max-w-xs">
+                    <?php endif; ?>
                 </div>
                 
                 <!-- Buttons for Edit and Delete -->

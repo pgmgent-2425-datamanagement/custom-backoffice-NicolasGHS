@@ -36,6 +36,15 @@ class GuitarController extends BaseController {
         $stock = (int)$_POST['stock'];
         $brandName = $_POST['brand'];
 
+        $name = $_FILES['image']['name'];
+        $tmp = $_FILES['image']['tmp_name'];
+
+        $to_folder = BASE_DIR . '/public/images/';
+
+        $uuid = uniqid() . '-' . $name;
+
+        move_uploaded_file($tmp, $to_folder . $uuid);
+
         $brandModel = new BrandModel();
         $brand = $brandModel->findByName($brandName);
 
@@ -53,6 +62,7 @@ class GuitarController extends BaseController {
         $guitar->setDescription($description);
         $guitar->setStock($stock);
         $guitar->setBrandId($brandId);
+        $guitar->setImage($uuid);
         $guitar->save();
 
         header('Location: /guitars');
@@ -84,6 +94,17 @@ class GuitarController extends BaseController {
         $description = $_POST['description'];
         $stock = (int)$_POST['stock'];
         $brandName = $_POST['brand'];
+
+        $imagePath = null;
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        // Het bestand uploaden
+        $imagePath = $this->storeImage($_FILES['image']);
+        if (!$imagePath) {
+            echo "Fout bij het uploaden van de afbeelding.";
+            return;
+        }
+    }
+
     
         $brandModel = new BrandModel();
         $brand = $brandModel->findByName($brandName);
@@ -103,6 +124,11 @@ class GuitarController extends BaseController {
         $guitar->setDescription($description);
         $guitar->setStock($stock);
         $guitar->setBrandId($brandId);
+
+        if ($imagePath) {
+            $guitar->setImagePath($imagePath); // Stel de afbeelding in als deze is geüpload
+        }
+
         $guitar->update();
     
         header('Location: /guitars');
