@@ -21,6 +21,7 @@
                 <a href="/guitars" class="block py-2.5 px-4 hover:bg-gray-700">Gitaren</a>
                 <a href="/brands" class="block py-2.5 px-4 hover:bg-gray-700">Merken</a>
                 <a href="/orders" class="block py-2.5 px-4 hover:bg-gray-700">Bestellingen</a>
+                <a href="/filemanager" class="block py-2.5 px-4 hover:bg-gray-700">Filemanager</a>
             </nav>
             <footer class="p-4 text-center text-xs text-gray-500">
                 &copy; <?= date('Y'); ?> - BrandName
