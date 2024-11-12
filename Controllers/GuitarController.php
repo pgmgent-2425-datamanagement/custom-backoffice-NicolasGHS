@@ -119,14 +119,14 @@ class GuitarController extends BaseController {
         }
     
         $guitar = new GuitarModel();
-        $guitar->setGuitarId($guitarId);  // Gebruik de setter hier
+        $guitar->setGuitarId($guitarId);  
         $guitar->setName($name);
         $guitar->setDescription($description);
         $guitar->setStock($stock);
         $guitar->setBrandId($brandId);
 
         if ($imagePath) {
-            $guitar->setImagePath($imagePath); // Stel de afbeelding in als deze is geüpload
+            $guitar->setImage($imagePath); 
         }
 
         $guitar->update();
@@ -142,6 +142,16 @@ class GuitarController extends BaseController {
     
         header('Location: /guitars');
         exit;
+    }
+
+    protected function storeImage($file) {
+        $to_folder = BASE_DIR . '/public/images/';
+        $uuid = uniqid() . '-' . $file['name'];
+        
+        if (move_uploaded_file($file['tmp_name'], $to_folder . $uuid)) {
+            return $uuid; // Geeft de naam van het opgeslagen bestand terug
+        }
+        return null; // Geeft null terug als er een fout optreedt
     }
     
 }

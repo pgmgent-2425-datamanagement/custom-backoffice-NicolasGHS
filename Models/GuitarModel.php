@@ -46,14 +46,14 @@ class GuitarModel extends BaseModel {
     }
 
     public function update() {
-        $sql = 'UPDATE guitars SET name = :name, description = :description, stock = :stock, brand_id = :brand_id, image_path = :image_path WHERE guitar_id = :guitar_id';
+        $sql = 'UPDATE guitars SET name = :name, description = :description, stock = :stock, brand_id = :brand_id, image = :image WHERE guitar_id = :guitar_id';
         $pdo_statement = $this->db->prepare($sql);
         $pdo_statement->execute([
             ':name' => $this->name,
             ':description' => $this->description,
             ':stock' => $this->stock,
             ':brand_id' => $this->brand_id,
-            ':image_path' => $this->image_path,
+            ':image' => $this->image ?? '',
             ':guitar_id' => $this->guitar_id,
         ]);
     }
